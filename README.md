@@ -1,22 +1,19 @@
 # RPC Scavenger Hunt
 
 These exercises require a synced mainnet full node with the transaction index
-active (`-txindex=1`). Chaincode Labs can provide credentials to a hosted node
-with an authenticated [proxy](https://github.com/pinheadmz/rpc-auth-proxy)
-so students can complete the exercises using `bitcoin-cli` locally but without
-needing to sync a full node themselves. To use the proxy you must have `bitcoin-cli`
-installed. It is part of the package you can download from [bitcoincore.org](https://bitcoincore.org/bin/bitcoin-core-26.0/).
+active (`-txindex=1`). To access the public node provided, you must have `bitcoin-cli`
+installed. It is part of the package you can download from [bitcoincore.org](https://bitcoincore.org/bin/bitcoin-core-28.0/).
 These packages obviously include the Bitcoin Core daemon as well, but you do not
 need to run it or sync a mainnet node yourself for this exercise.
 
 ## RPC server IP: `84.247.182.145`
 
-Students will be emailed unique username / password pairs.
+Students will be emailed unique username/password pairs.
 
 Usage example:
 
 ```sh
-$ bitcoin-cli -rpcconnect=84.247.182.145 -rpcuser=a_plus_student -rpcpassword=hunter2 getblockcount
+$ bitcoin-cli -rpcconnect=84.247.182.145 -rpcuser=<user> -rpcpassword=<password> getblockcount
 823280
 ```
 
@@ -24,8 +21,8 @@ or you can add these lines to your `bitcoin.conf` file:
 
 ```
 rpcconnect=84.247.182.145
-rpcuser=a_plus_student
-rpcpassword=hunter2
+rpcuser=<user>
+rpcpassword=<password>
 ```
 
 ...and then execute `bitcoin-cli getblockcount` without extra options.
@@ -49,6 +46,8 @@ every time.
 There are empty template files for each script in the [submission](/submission)
 directory in this repository. You MUST write your scripts into these files for
 the autograder to work properly. Do NOT rename the script files!
+
+You can solve the task using any programming language, but you should adapt the scripts in the `submissions` directory to build and call your programs. The autograder will always call, e.g., `bash submission/001.sh` from the root of the repository. The answer should be a single line with the required answer and nothing more. 
 
 Answer as many as you can. Some are easy, some are very hard!
 
@@ -84,7 +83,6 @@ Answer as many as you can. Some are easy, some are very hard!
   - `e5969add849689854ac7f28e45628b89f7454b83e9699e551ce14b6f90c86163`
 
 
-
 ## Example:
 
 *How many transactions are confirmed in block 666,666?*
@@ -97,4 +95,7 @@ block=$(bitcoin-cli getblock $hash)
 echo $block | jq .nTx
 ```
 
-Answer: `2728`
+``` sh
+$ bash solution.sh
+2728
+```
