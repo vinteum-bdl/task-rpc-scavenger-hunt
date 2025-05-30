@@ -6,21 +6,21 @@ installed. It is part of the package you can download from [bitcoincore.org](htt
 These packages obviously include the Bitcoin Core daemon as well, but you do not
 need to run it or sync a mainnet node yourself for this exercise.
 
-## RPC server IP: `84.247.182.145`
+## RPC server IP: `217.76.54.77`
 
 Students will be emailed unique username/password pairs.
 
 Usage example:
 
 ```sh
-$ bitcoin-cli -rpcconnect=84.247.182.145 -rpcuser=<user> -rpcpassword=<password> getblockcount
+$ bitcoin-cli -rpcconnect=217.76.54.77 -rpcuser=<user> -rpcpassword=<password> getblockcount
 823280
 ```
 
 or you can add these lines to your `bitcoin.conf` file:
 
 ```
-rpcconnect=84.247.182.145
+rpcconnect=217.76.54.77
 rpcuser=<user>
 rpcpassword=<password>
 ```
