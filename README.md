@@ -1,53 +1,60 @@
 # RPC Scavenger Hunt
 
 These exercises require a synced mainnet full node with the transaction index
-active (`-txindex=1`). To access the public node provided, you must have `bitcoin-cli`
-installed. It is part of the package you can download from [bitcoincore.org](https://bitcoincore.org/bin/bitcoin-core-28.0/).
+active (`-txindex=1`). 
+Vinteum provides credentials to a hosted node with an authenticated proxy so students can complete the exercises using `bitcoin-cli` locally but without needing to sync a full node themselves.
+To use the proxy you must have `bitcoin-cli` installed.
+It is part of the package you can download from [bitcoincore.org](https://bitcoincore.org/bin/bitcoin-core-30.0/).
 These packages obviously include the Bitcoin Core daemon as well, but you do not
 need to run it or sync a mainnet node yourself for this exercise.
 
-## RPC server IP: `217.76.54.77`
-
-Students will be emailed unique username/password pairs.
+Students will be emailed unique username / password pairs and the IP of the node.
 
 Usage example:
 
 ```sh
-$ bitcoin-cli -rpcconnect=217.76.54.77 -rpcuser=<user> -rpcpassword=<password> getblockcount
+$ bitcoin-cli -rpcconnect=<node_ip> -rpcuser=<student_user> -rpcpassword=<student_pass getblockcount
 823280
 ```
 
 or you can add these lines to your `bitcoin.conf` file:
 
 ```
-rpcconnect=217.76.54.77
-rpcuser=<user>
-rpcpassword=<password>
+rpcconnect=<node_ip>
+rpcuser=<student_user>
+rpcpassword=<student_pass>
 ```
 
 ...and then execute `bitcoin-cli getblockcount` without extra options.
 
-*HINT*: Use `bitcoin-cli help` and `bitcoin-cli help <command name>` to learn
-  what commands are available and what they do.
+*HINT*: Use `bitcoin-cli help` and `bitcoin-cli help <command name>` to learn what commands are available and what they do.
 
 
 ## Expected submissions
 
 Every question must be answered by providing a bash script that executes `bitcoin-cli`
-commands. No other commands should be necessary besides bash operators (for loops, if/else logic, etc)
-and `jq`, which is a JSON parsing command you may need to manually install on your system.
+commands.
+No other commands should be necessary besides bash operators (for loops, if/else logic, etc) and `jq`, which is a JSON parsing command you may need to manually install on your system.
 
-Each student will get a private fork of this repository
-when they join the GitHub Classroom assignment. You will commit and push your
-submissions to GitHub which will evaluate the answers automatically. You can
-commit and push as often as you like and GitHub will re-evaluate your code
+*HINT*: `jq` is your best friend, learn to use it and you'll be able to significantly speedup your solutions.
+
+Each script should output a single line to stdout with the required answer and nothing else.
+
+Each student will get a private fork of this repository when they join the GitHub Classroom assignment.
+You will commit and push your submissions to GitHub which will evaluate the answers automatically.
+You can commit and push as often as you like and GitHub will re-evaluate your code
 every time.
 
-There are empty template files for each script in the [submission](/submission)
-directory in this repository. You MUST write your scripts into these files for
-the autograder to work properly. Do NOT rename the script files!
+Github will automatically create a pull request titled `Feedback` on your repo.
+**Do not close or merge this PR**, it will be used to give you feedback by one of the instructors.
 
-You can solve the task using any programming language, but you should adapt the scripts in the `submissions` directory to build and call your programs. The autograder will always call, e.g., `bash submission/001.sh` from the root of the repository. The answer should be a single line with the required answer and nothing more. 
+There are empty template files for each script in the [submission](/submission) directory in this repository.
+You MUST write your scripts into these files for the autograder to work properly.
+Do NOT rename the script files!
+
+You can solve these exercises using any language you see fit, but keep in mind that the autograder will always call the bash scripts in the submission folder (e.g. with `bash submissions/001.sh`).
+Consider this to provide proper compilation and runtime commands.
+You can check what's available in the virtual machine [here](https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2404-Readme.md).
 
 Answer as many as you can. Some are easy, some are very hard!
 
@@ -82,6 +89,10 @@ Answer as many as you can. Some are easy, some are very hard!
 [008.sh](/submission/008.sh): Which public key signed input 0 in this tx:
   - `e5969add849689854ac7f28e45628b89f7454b83e9699e551ce14b6f90c86163`
 
+[009.sh](/submission/009.sh): How many satoshis did this transaction pay for fee?
+  - `c346d9277128f5d67740f8847f11aff5cef440b6d102fcd5ddcdb40d9a12df42`
+
+[010.sh](/submission/010.sh): Only one tx in block 444,431 signals opt-in RBF. What is its txid?
 
 ## Example:
 
@@ -95,7 +106,4 @@ block=$(bitcoin-cli getblock $hash)
 echo $block | jq .nTx
 ```
 
-``` sh
-$ bash solution.sh
-2728
-```
+Answer: `2728`

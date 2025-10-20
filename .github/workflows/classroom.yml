@@ -1,0 +1,183 @@
+name: Autograding Tests
+on:
+  - push
+  - workflow_dispatch
+  - repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Setup
+      id: setup
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Setup
+        setup-command: ''
+        command: bash ./submission/setup.sh
+        timeout: 10
+
+    - name: What is the hash of block 654,321?
+      id: exercise1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: What is the hash of block 654,321?
+        setup-command: ''
+        command: bash ./submission/001.sh | sha256sum
+        input: ''
+        expected-output: '743ccb4b5e8ab1077e42772a3337a434576e12f8ea455a66d17286ac84bb5ae4  -'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+
+    - name: Verify the signature by this address over this message...
+      id: exercise2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Verify the signature by this address over this message...
+        setup-command: ''
+        command: bash ./submission/002.sh | sha256sum
+        input: ''
+        expected-output: '2ed27c1421e6928dbe13dbfdb5c59e1045b30341fe7ebe05700006bc5ac572c0  -'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+
+    - name: How many new outputs were created by block 123,456?
+      id: exercise3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: How many new outputs were created by block 123,456?
+        setup-command: ''
+        command: bash ./submission/003.sh | sha256sum
+        input: ''
+        expected-output: '68ca3fba3b7e864770cb61aeb306d4bd4354b68ab4dd38450860c5d823e42a53  -'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+
+    - name: Using descriptors, compute the 100th taproot address derived from this
+        extended public key...
+      id: exercise4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Using descriptors, compute the 100th taproot address derived from
+          this extended public key...
+        setup-command: ''
+        command: bash ./submission/004.sh | sha256sum
+        input: ''
+        expected-output: '23a53d2957b239f2cd74b4f5eb9514d32c0ce34fd3a1200cd90e60c9f78a0547  -'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+
+    - name: Create a 1-of-4 P2SH multisig address from the public keys in the four
+        inputs of this tx...
+      id: exercise5
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Create a 1-of-4 P2SH multisig address from the public keys in the
+          four inputs of this tx...
+        setup-command: ''
+        command: bash ./submission/005.sh | sha256sum
+        input: ''
+        expected-output: 'cb7f7ce763f7b06512b2af5c95f93ae8b9e27cb5c64dfd27d21742301a53dbcc  -'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+
+    - name: Which tx in block 257,343 spends the coinbase output of block 256,128?
+      id: exercise6
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Which tx in block 257,343 spends the coinbase output of block 256,128?
+        setup-command: ''
+        command: bash ./submission/006.sh | sha256sum
+        input: ''
+        expected-output: 'e3c4e7c262cf53c6ff853e0f7d161de996956c66c8523229efb974e45fbf986b  -'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+
+    - name: Only one single output remains unspent from block 123,321. What address
+        was it sent to?
+      id: exercise7
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Only one single output remains unspent from block 123,321. What
+          address was it sent to?
+        setup-command: ''
+        command: bash ./submission/007.sh | sha256sum
+        input: ''
+        expected-output: '26b0e20d8554b56bb194402c7a413743ec592d4cea854e406d6f17416c57143b  -'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+
+    - name: Which public key signed input 0 in this tx...
+      id: exercise8
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Which public key signed input 0 in this tx...
+        setup-command: ''
+        command: bash ./submission/008.sh | sha256sum
+        input: ''
+        expected-output: '81f27ca06c218d52086ef1c58e51286ce30cc3a3ffe4ede2646c78ac832516da  -'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+
+    - name: How many satoshis did this transaction pay for fee?
+      id: exercise9
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: How many satoshis did this transaction pay for fee
+        setup-command: ''
+        command: bash ./submission/009.sh | sha256sum
+        input: ''
+        expected-output: '80c36198dd1eb31c4f614570d1de9eba7e78a0adaf2a635f7a2773998a18bef7  -'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+
+    - name: Only one tx in block 444,431 signals opt-in RBF. What is its txid?
+      id: exercise10
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Only one tx in block 444,431 signals opt-in RBF. What is its txid
+        setup-command: ''
+        command: bash ./submission/010.sh | sha256sum
+        input: ''
+        expected-output: '89764874bfe05189ef125b01aaab96813b3e16cc129dd0738f3d996e7d8e8f8c  -'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        EXERCISE1_RESULTS: "${{ steps.exercise1.outputs.result }}"
+        EXERCISE2_RESULTS: "${{ steps.exercise2.outputs.result }}"
+        EXERCISE3_RESULTS: "${{ steps.exercise3.outputs.result }}"
+        EXERCISE4_RESULTS: "${{ steps.exercise4.outputs.result }}"
+        EXERCISE5_RESULTS: "${{ steps.exercise5.outputs.result }}"
+        EXERCISE6_RESULTS: "${{ steps.exercise6.outputs.result }}"
+        EXERCISE7_RESULTS: "${{ steps.exercise7.outputs.result }}"
+        EXERCISE8_RESULTS: "${{ steps.exercise8.outputs.result }}"
+        EXERCISE9_RESULTS: "${{ steps.exercise9.outputs.result }}"
+        EXERCISE10_RESULTS: "${{ steps.exercise10.outputs.result }}"
+      with:
+        runners: exercise1,exercise2,exercise3,exercise4,exercise5,exercise6,exercise7,exercise8,exercise9,exercise10
