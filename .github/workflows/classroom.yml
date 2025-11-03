@@ -69,7 +69,7 @@ jobs:
         timeout: 10
         max-score: 1
 
-    - name: Using descriptors, compute the 100th taproot address derived from this
+    - name: Using descriptors, compute the taproot address at index 100 derived from the root of this
         extended public key...
       id: exercise4
       uses: classroom-resources/autograding-io-grader@v1
